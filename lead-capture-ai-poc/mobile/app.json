@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Lead Capture AI",
+    "slug": "lead-capture-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": { "supportsTablet": false },
+    "android": { "package": "com.hexawarre.leadcapture" }
+  }
+}

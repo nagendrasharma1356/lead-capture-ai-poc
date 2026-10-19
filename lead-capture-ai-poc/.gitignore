@@ -1,0 +1,7 @@
+backend/target/
+backend/data/
+web/node_modules/
+web/dist/
+mobile/node_modules/
+mobile/.expo/
+.idea/

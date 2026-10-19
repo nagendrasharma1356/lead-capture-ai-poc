@@ -1,0 +1,50 @@
+{
+  "info": {
+    "name": "Lead Capture AI POC",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "base", "value": "http://localhost:8080/api" }],
+  "item": [
+    {
+      "name": "Submit lead (with consent)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base}}/leads?source=WEB",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Asha Verma\",\n  \"phone\": \"312-555-0111\",\n  \"email\": \"asha@example.com\",\n  \"zip\": \"60601\",\n  \"propertyAddress\": \"221 Lake Street, Chicago\",\n  \"propertyType\": \"SINGLE_FAMILY\",\n  \"propertyCondition\": \"NEEDS_REPAIR\",\n  \"consent\": true\n}"
+        }
+      }
+    },
+    {
+      "name": "Submit lead (consent=false -> 400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base}}/leads",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"No Consent\",\n  \"phone\": \"312-555-0199\",\n  \"zip\": \"60601\",\n  \"propertyAddress\": \"1 Main Street, Chicago\",\n  \"consent\": false\n}"
+        }
+      }
+    },
+    { "name": "List leads", "request": { "method": "GET", "url": "{{base}}/leads" } },
+    { "name": "Stats", "request": { "method": "GET", "url": "{{base}}/stats" } },
+    {
+      "name": "QA test run - start (fake data)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base}}/test-runs/start",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"count\": 10,\n  \"minDelayMs\": 1000,\n  \"maxDelayMs\": 3000,\n  \"sendWebhook\": false\n}"
+        }
+      }
+    },
+    { "name": "QA test run - status", "request": { "method": "GET", "url": "{{base}}/test-runs/status" } },
+    { "name": "QA test run - stop", "request": { "method": "POST", "url": "{{base}}/test-runs/stop" } },
+    { "name": "Delete test leads", "request": { "method": "DELETE", "url": "{{base}}/test-runs/data" } }
+  ]
+}
